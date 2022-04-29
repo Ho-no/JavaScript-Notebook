@@ -92,3 +92,121 @@ ES7 新增了指数操作符 **。
 - 如果有任一操作数是对象，则调用 valueOf() 方法转换为数值，然后执行数值比较。如果没有 valueOf() 方法，则调用 toString() 方法转换为字符串，然后执行字符串比较。
 - 布尔值会被转换为数值。
 
+## 相等操作符
+
+等于
+
+- 如果任一操作符是布尔值，将其转换为数值
+- 如果一个操作数是字符串，另一个操作数事数值，则尝试将字符串转换为数值。
+- 如果一个操作数是对象，另一个不是对象，则调用 valueOf() 方法转换为原始值。
+- null 和 undefined 相等。null 和 undefined 与其他任何值不相等。
+- NaN 和任何值不相等，包括 NaN。
+- 如果两个操作数都是对象，当且仅当指向同一个对象时，才相等。
+
+全等
+
+
+全等操作只有在两个操作数在不转换的前提下相等时，才会返回 true。
+
+## 条件操作符
+
+即三目运算符
+
+## 赋值操作符
+
+    let [a, b, c] = [1, 2, 3];
+
+## 逗号操作符
+
+在一条语句中同时声明多个变量是逗号操作符最常用的场景。
+
+    let num1 = 1, num2 = 2, num3 = 3; 
+
+也可以使用逗号操作符来辅助赋值。在赋值时使用逗号操作符分隔值，最终会返回表达式中最后一个值
+
+    let num = (5, 1, 4, 8, 0); // num 的值为 0
+
+
+# 语句
+
+## if 语句
+
+if 语句会自动调用 Boolean() 函数，将条件转换为布尔值。
+
+## do-while 语句
+
+Nothing special.
+
+## while 语句
+
+Nothing special.
+
+## for-in 语句
+
+for-in 语句是一种严格的迭代语句，用于枚举对象中的非符号键属性，语法如下：
+
+    for (property in expression) statement
+
+推荐使用 const 修饰 property。
+
+ECMAScript 中对象的属性是无序的，因此 for-in 语句不能保证返回对象属性的顺序。换句话说，所有可枚举的属性都会返回一次，但返回的顺序可能会因浏览器而异。
+
+## for-of 语句
+
+for-of 语句是一种严格的迭代语句，用于遍历可迭代对象的元素，语法如下：
+
+    for (property of expression) statement
+
+expression 必须是一个可迭代的对象。如果不是, for-of 语句会抛出 TypeError 异常。（参见第 7 章）
+
+## 标签语句
+
+用于 break 和 continue 语句的跳转。
+
+## break 和 continue 语句
+
+配合标签，可以从内层对外层的循环进行 break 和 continue 操作。
+
+## with 语句
+
+不推荐使用 with 语句，在严格模式也不允许使用 with 语句。
+
+## switch 语句
+
+    switch (expression) {
+        case value1:
+            statements1;
+            break;
+        case value2:
+            statements2;
+            break;
+        default:
+            statements3;
+    }
+
+value 可以是变量及表达式。因此可以使用如下方法进行逻辑判断：
+
+    switch (true) {
+        case value < 0>:
+            statements1;
+            break;
+        case value > 0:
+            statements2;
+            break;
+        default:
+            statements3;
+    }
+
+# 函数
+
+ES 中的函数
+- 不需要指定函数的返回值，因为任何函数可以在任何时候返回任何值。
+- 不指定返回值的函数实际上会返回特殊值 undefined。
+
+
+在严格模式下，函数有以下限制：
+- 函数不能以 eval 或 arguments 作为名称。
+- 函数的参数也不能叫 eval 或 arguments。
+- 两个命名参数不能拥有同一个名称。（意义不明，本来就不能重名。）
+
+详见第 10 章。
