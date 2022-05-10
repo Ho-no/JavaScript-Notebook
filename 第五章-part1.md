@@ -100,3 +100,43 @@ RegExp 可以直接用字面量创建，也可以向构造函数传入两个表�
 RegExp 实例的主要方法是 exec()；这个方法接受一个字符串，返回一个包含匹配信息的数组，如果没有匹配，返回 null。
 
 返回的数组虽然是 Array 实例，但包含两个额外的属性：index 和 input。index 是字符串中模式匹配的起始位置，input 是要查找的字符串。
+
+如果设置了全局标记或粘附标记，调用 exec() 方法后，lastIndex 属性将被设置为匹配的结束位置。区别在于，匹配到的字符串在粘附模式下必须包含以 lastIndex 开头（所有匹配间不能有空隙）。
+
+正则表达式的另一个方法是 test()，接受一个字符串。如果与模式匹配，返回 true，否则返回 false。
+
+无论正则表达式是怎么创建的，继承的方法 toLocaleString()和 toString()都返回正则表达式的字面量表示。
+
+## RegExp 构造函数属性
+
+RegExp 构造函数本身也有属性（类似静态属性）。RegExp 的属性会根据最后执行的正则表达式操作而变换。
+
+RegExp 的属性可以用全名或者缩写来访问：
+
+| 全名 | 缩写 | 说明 |
+| --- | --- | --- |
+| input | $_ | 最后搜索的字符串 |
+| lastMatch | $& | 最后一次匹配的字符串 |
+| lastParen | $+ | 最后匹配的捕获组 |
+| leftContext | $` | lastMatch 前面的文本 |
+| rightContext | $' | lastMatch 后面的文本 |
+
+捕获组是指在正则表达式中用 ( ) 定义的子表达式。
+
+这些属性名也可以替换成简写形式，只不过要使用中括号语法来访问，如下面的例子所示，因为大多数简写形式都不是合法的 ECMAScript 标识符：
+
+    let text = "this has been a short summer"; 
+    let pattern = /(.)hort/g; 
+
+    if (pattern.test(text)) { 
+        console.log(RegExp.$_); // this has been a short summer 
+        console.log(RegExp["$`"]); // this has been a 
+        console.log(RegExp["$'"]); // summer 
+        console.log(RegExp["$&"]); // short 
+        console.log(RegExp["$+"]); // s 
+    } 
+
+RegExp.$1 ~ RegExp.$9 分别保存了 1 ~ 9 个捕获组。
+
+RegExp 构造函数的所有属性都没有任何 Web 标准出处，因此不要在生产环境中使用它们。( ? )
+
